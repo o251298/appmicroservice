@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+    app:
+        build:
+            context: .
+            dockerfile: .docker/Dockerfile
+        image: 'laravelapp'
+        ports:
+            - 8080:80
+        volumes:
+            - ./:/var/www/html
+    db:
+        image: mysql:5.7
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: 'php_8'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+            MYSQL_ROOT_PASSWORD: "o251298"
+        volumes:
+            - ./db:/var/lib/mysql
+    redis:
+        image: redis:alpine
+        command: redis-server /usr/local/etc/redis/redis.conf --requirepass mypassword
+        ports:
+            - "6379:6379"
+        volumes:
+            - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
