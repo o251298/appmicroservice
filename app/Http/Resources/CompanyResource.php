@@ -20,6 +20,7 @@ class CompanyResource extends JsonResource
                 'title' => $this->title,
                 'number' => $this->number,
                 'description' => $this->description,
+                'user' => $this->getUser()->first()
             ]
         ];
     }

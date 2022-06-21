@@ -25,7 +25,8 @@ Route::get('logout', [APIAuthenticationController::class, 'logout'])->name('api_
 
 // COMPANY SERVICE
 Route::get('service/companies', [CompanyController::class, 'index']);
-Route::get('service/companies/create', [CompanyController::class, 'create']);
+Route::post('service/companies/create', [CompanyController::class, 'create']);
 
 // CLIENT SERVICE
 Route::get('client/companies', [ClientController::class, 'getCompany'])->name('client_companies');
+Route::post('client/companies/create', [ClientController::class, 'createCompany'])->name('client_companies_create');

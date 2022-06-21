@@ -75,17 +75,26 @@
 
         <div class="col col-lg-6">
             <h2>Create company</h2>
-            <a href=""></a>
-        </div>
-
-        <div class="col col-lg-6">
-            <h2>Logout</h2>
-            <a href=""></a>
-        </div>
-
-        <div class="col col-lg-6">
-            <h2>Logout</h2>
-            <a href=""></a>
+            <form class="create-company" action="{{route('client_companies_create')}}" method="post">
+                @csrf
+                <div class="mb-3">
+                    <label for="token" class="form-label">Token for send*</label>
+                    <input type="text" name="token" class="form-control" id="token_test" aria-describedby="nameHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="title" class="form-control" id="title_create" aria-describedby="nameHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" name="description" class="form-control" id="description_create">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">phone</label>
+                    <input type="text" name="phone" class="form-control" id="phone_create">
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
         </div>
     </div>
 @endsection

@@ -34,7 +34,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'api_token',
+        'email_verified_at',
+        'pivot'
     ];
+
+    public function getToken()
+    {
+        return $this->api_token;
+    }
 
     /**
      * The attributes that should be cast.
@@ -64,5 +72,10 @@ class User extends Authenticatable
         } else {
             throw new AuthException('User by this ' . $token . ' token is not found');
         }
+    }
+
+    public function getCompany()
+    {
+        return $this->belongsToMany(Company::class, 'user_company', 'user_id', 'company_id');
     }
 }

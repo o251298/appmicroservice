@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
 
@@ -20,5 +21,9 @@ class ApiHttpException extends Exception
             'status' => 'error',
             'info' => $this->getMessage()
         ];
+    }
+    public function status()
+    {
+        return Response::HTTP_BAD_REQUEST;
     }
 }

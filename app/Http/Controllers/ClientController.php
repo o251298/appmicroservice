@@ -6,8 +6,10 @@ use App\Exceptions\ApiHttpException;
 use App\Exceptions\AuthException;
 use App\Models\User;
 use App\Services\HttpClient;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -37,13 +39,18 @@ class ClientController extends Controller
         }
     }
 
-    public function createCompany()
+    public function createCompany(Request $request)
     {
         try {
-            User::isAuthByTokenForApi(request()->bearerToken());
+            Log::channel('http_request')->info($request);
+            $user = User::isAuthByTokenForApi(request()->bearerToken());
             $client = new HttpClient(new Http());
+            $company = $client->post('service/companies/create', array_merge($request->all(), array('user' => $user->id)));
+            return \response()->json($company, Response::HTTP_CREATED);
         } catch (AuthException $exception)
         {
+            return \response()->json($exception->getInfo(), $exception->status());
+        } catch (ApiHttpException $exception) {
             return \response()->json($exception->getInfo(), $exception->status());
         }
     }
