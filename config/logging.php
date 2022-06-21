@@ -50,13 +50,28 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single', 'http_request', 'http_response', 'api_auth'],
             'ignore_exceptions' => false,
         ],
 
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        'api_auth' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/api_auth/' . date('Y_m_d'). '.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        'http_request' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/http_request/' . date('Y_m_d'). '.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        'http_response' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/http_response/' . date('Y_m_d'). '.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 

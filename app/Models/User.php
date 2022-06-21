@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Exceptions\AuthException;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Response;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -20,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'api_token',
         'password',
     ];
 
@@ -41,4 +44,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function isAuth($token)
+    {
+        if ($user = self::where('api_token', $token)->first())
+        {
+            return $user;
+        } else {
+            return false;
+        }
+    }
+
+
+    public static function isAuthByTokenForApi(string|null $token) : User | null
+    {
+        if ($user = self::where('api_token', (string) $token)->first())
+        {
+            return $user;
+        } else {
+            throw new AuthException('User by this ' . $token . ' token is not found');
+        }
+    }
 }
