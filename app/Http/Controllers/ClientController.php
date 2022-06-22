@@ -13,18 +13,6 @@ use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
-    public function register()
-    {
-
-    }
-    public function auth()
-    {
-        dd("auth");
-    }
-    public function resetPassword()
-    {
-
-    }
     public function getCompany()
     {
         try {
@@ -42,7 +30,6 @@ class ClientController extends Controller
     public function createCompany(Request $request)
     {
         try {
-            Log::channel('http_request')->info($request);
             $user = User::isAuthByTokenForApi(request()->bearerToken());
             $client = new HttpClient(new Http());
             $company = $client->post('service/companies/create', array_merge($request->all(), array('user' => $user->id)));

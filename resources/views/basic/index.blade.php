@@ -57,7 +57,17 @@
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
         </div>
-
+        <div class="col col-lg-6">
+            <h2>Reset password</h2>
+            <form class="auth" action="{{route('api_reset_password')}}" method="post">
+                @csrf
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+                </div>
+                <button type="submit" class="btn btn-primary">Reset password</button>
+            </form>
+        </div>
         <div class="col col-lg-6">
             <h2>Companies</h2>
             <div class="card" style="width: 18rem; display: none" id="companies">
@@ -95,6 +105,9 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
+        </div>
+
+        <div class="col col-lg-6">
         </div>
     </div>
 @endsection

@@ -19,7 +19,7 @@ class CompanyController extends Controller
 
     public function create(Request $request)
     {
-        Log::channel('http_request')->info($request);
+        Log::channel('company_http_request')->info($request);
         if(empty($request['title']) || empty($request['description']) || empty($request['phone'])) return false;
         $company = Company::create([
             'title' => $request['title'],
@@ -30,6 +30,7 @@ class CompanyController extends Controller
            'user_id' => $request['user'],
            'company_id' => $company->id
         ]);
+        Log::channel('company_http_response')->info($company);
         return $company;
     }
 }

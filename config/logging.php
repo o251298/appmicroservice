@@ -59,6 +59,34 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
+        // CLIENT SERVICE
+        'client_http_request' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/services/client/http_request/' . date('Y_m_d'). '.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        'client_http_response' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/services/client/http_response/' . date('Y_m_d'). '.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        // COMPANY SERVICE
+        'company_http_request' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/services/company/http_request/'. date('Y_m_d'). '.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        'company_http_response' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/services/company/http_response/' . date('Y_m_d'). '.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        // AUTH SERVICE
+        'auth_reset_password' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/services/auth/reset_password/' . date('Y_m_d'). '.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
         'api_auth' => [
             'driver' => 'single',
             'path' => storage_path('logs/api_auth/' . date('Y_m_d'). '.log'),

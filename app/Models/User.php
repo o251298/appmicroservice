@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Response;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -77,5 +78,15 @@ class User extends Authenticatable
     public function getCompany()
     {
         return $this->belongsToMany(Company::class, 'user_company', 'user_id', 'company_id');
+    }
+
+    public function setPassword($val)
+    {
+        return $this->password = Hash::make($val);
+    }
+
+    public function setApiToken($val)
+    {
+        return $this->api_token = hash('sha256', $val);
     }
 }
