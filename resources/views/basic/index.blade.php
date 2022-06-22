@@ -12,7 +12,7 @@
 
         <div class="col col-lg-6">
             <h2>Register</h2>
-            <form class="auth" method="post" action="{{route('api_register')}}">
+            <form class="auth" method="post" action="{{route('user_register')}}">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">name</label>
@@ -30,15 +30,12 @@
                     <label for="password_repeat" class="form-label">Password Repeat</label>
                     <input type="password" name="password_repeat" class="form-control" id="password_repeat">
                 </div>
-                <div class="mb-3">
-                    <p>Already have <a href="{{route('login_page')}}">account?</a></p>
-                </div>
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>
         </div>
         <div class="col col-lg-6">
             <h2>Login</h2>
-            <form class="auth" action="{{route('api_login')}}" method="post">
+            <form class="auth" action="{{route('user_login')}}" method="post">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">email</label>
@@ -48,18 +45,12 @@
                     <label for="password" class="form-label">Password</label>
                     <input type="password" name="password" class="form-control" id="password">
                 </div>
-                <div class="mb-3">
-                    <p>Don't have <a href="{{route('register_page')}}">account?</a></p>
-                </div>
-                <div class="mb-3">
-                    <p>Don't remember your <a href="{{route('reset_password_page')}}">password?</a></p>
-                </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
         </div>
         <div class="col col-lg-6">
             <h2>Reset password</h2>
-            <form class="auth" action="{{route('api_reset_password')}}" method="post">
+            <form class="auth" action="{{route('user_recover_password')}}" method="post">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -75,7 +66,7 @@
 
                 </ul>
             </div>
-            <form action="{{route('client_companies')}}" method="get" id="form_company">
+            <form action="{{route('user_companies')}}" method="get" id="form_company">
                 @csrf
                 <label for="api_token">Token</label>
                 <input type="text" name="api_token" id="api_token">
@@ -85,7 +76,7 @@
 
         <div class="col col-lg-6">
             <h2>Create company</h2>
-            <form class="create-company" action="{{route('client_companies_create')}}" method="post">
+            <form class="create-company" action="{{route('user_companies_create')}}" method="post">
                 @csrf
                 <div class="mb-3">
                     <label for="token" class="form-label">Token for send*</label>

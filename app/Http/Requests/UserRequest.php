@@ -28,10 +28,10 @@ class UserRequest extends FormRequest
         ];
         switch ($this->route()->getName())
         {
-            case "api_login":
+            case "user_login":
                 $validation['email'] = 'required|max:255';
                 break;
-            case "api_register":
+            case "user_register":
                 $validation['name']  = 'required|unique:users';
                 $validation['email'] = 'required|unique:users';
                 $validation['password_repeat'] = 'required';
